@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <!-- thymeleaf의 유일한 태그,표준태그가 아니여서 화면에 그려지지 않음. 임시변수 선언: 자신이 가지고 있는 반복문 사용할때 사용 내장객체 #으로 시작함.-->
+  <th:block th:each="num:${#numbers.sequence(1,5)}">
+     <p th:text="${num}"/>
+  </th:block>
+</body>
+</html>
