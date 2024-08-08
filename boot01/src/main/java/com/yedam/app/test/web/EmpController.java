@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yedam.app.emp.service.EmpService;
@@ -45,6 +44,7 @@ public class EmpController {
 
     
     //단건 조회(컨트롤러가 하나면 됨. ) GET => QueryString(커맨드 객체,리퀘스트 파람)
+  //경로:http://localhost:8099/yedam/empInfo
     @GetMapping("empInfo")
     public String empInfo(EmpVO empVO, Model model) {
     	//1) 해당 기능 수행 => Service	
@@ -57,10 +57,12 @@ public class EmpController {
     	//prefix                     return      subfix
     }//empInfo end
     //등록-페이지확인(컨트롤러가 기본적으로 2개)GET
+    @GetMapping("empInsert")
     public String empInsertForm() {
     	return "emp/insert";
     }
     //등록-처리(컨트롤러가 기본적으로 2개):POST 데이터를 받아야함.커맨드 객체 쓸거냐?웅 form 태그 쓸거냐? form태그를 통한 submit 아작스 권장
+    //경로:http://localhost:8099/yedam/empInfo?employeeId=100
     @PostMapping("empInsert")
     public String empInsertProcess(EmpVO empVO) {
     	int eid = empService.empInsert(empVO);
@@ -80,12 +82,14 @@ public class EmpController {
     public String empUpdateFrom(EmpVO empVO, Model model) {
        EmpVO findVO = empService.empInfo(empVO);
        model.addAttribute("emp",findVO);
-       return "emp/info";
+       return "emp/update";
     }//empUpdateFrom end
     
     //수정-처리:AJAX => QueryString(컨트롤러가 기본적으로 2개, 원래 가지고 있는 데이터가 이거입니다.) 리다이렉트 안함... 수정이 연속으로 일어나는경우가 많음 아작스 권장
+    //empUpdate
     @PostMapping("empUpdate")
     //이 컨트롤러는 예외적으로 데이터를 처리해주세용이 리스폰스바디임.
+    @ResponseBody
     public Map<String, Object> empupdateAJAXQueryString( EmpVO empVO){ //커맨드 객체로 만들어주면된다는데 음?????
     	return empService.empUpdate(empVO);//리턴하는 데이터를 클라이언트에게 바로 붙혀준당....그래서 리스판스바디가 붙음.
        }

@@ -20,7 +20,7 @@ public class ThymeleafController {
 		empVO.setEmployeeId(100);
 		
 		EmpVO findVO = empService.empInfo(empVO);
-		model.addAttribute("empInfo", findVO);
+		model.addAttribute("empInfo", findVO);//화면 연결과 가장 영향이 큼 empInfo->test.html에 <p>[[${empInfo}]]</p>에서 확인 가능
 		return "test";
 	}
 }

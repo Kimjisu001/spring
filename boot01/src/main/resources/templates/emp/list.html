@@ -1,10 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org/"> 
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
 <head>
 <meta charset="UTF-8">
+<meta name="contextPath" th:value="${contextPath}">
+<!-- <meta name="contextPath" th:value="${#httpServletRequest.getcontextPath()}"> -->
 <title>전체조회</title>
 </head>
 <body>
 <h1>전체조회</h1>
+<div>
+    <h3>전체 사원 조회</h3>
+    <table>
+         <thead>
+             <tr>
+                 <th>No.</th>
+                 <th>사원번호</th>
+                 <th>이름</th>
+                 <th>입사일자</th>
+                 <th>업무</th>
+             </tr>
+         </thead>
+         <tbody>
+                 <!--타임리프의 유일한 태그 each와 함께 사용(복합제어문)-->
+                 <!-- 배열의 값(컨트롤러가 넘겨줌) -->
+                 <!-- stats :해당 자리에 들어가는 변수는 반복문의 상태값을 가짐. -->
+                 <t:block th:each="info,stats :${emps}" >
+                  <!-- 반복하고자 하는 태그 정의 -->
+                  <!-- location.href='/yedam/empInfo?employeeId=100';
+                       location.href='@{/empInfo?employeeId=100}'표현식이 중첩되면 오류나기때문에
+                       location.href='@{/empInfo(employeeId=${info.employeeId})}' 최종적으로 ()로 공간을 만듬.    
+                       |location.href='@{/empInfo(employeeId=${info.employeeId}, key=${})}' 
+***중요포인트             |location.href='@{/empInfo(employeeId=${info.employeeId})}'| ||내부에 있는 타임리프 전체를 해석해줌(보이는 그대로 해석해줘)
+                       onclick은 권장 사항은 아님, 애드이벤트리스너 사용 권장-->
+                   
+                   <!--  <tr th:onclick="|location.href='@{/empInfo(employeeId=${info.employeeId})}'|"> -->
+                    <tr>
+                    <td>[[${stats.count}]]</td>
+                    <!-- 속성 접근 -->
+                    <td th:text="${info.employeeId}"/>
+                    <td th:text="${info.firstName}"/>
+                    <!-- 템플릿 방식(*) -->
+                    <!-- <td>[[${info.hireDate}]]</td> -->
+                    <!-- 내장객체는 #으로 표현함. 대소문자 구분 필요 -->
+                    <!-- format(Date target, String pattern) -->
+                    <td>[[${#dates.format(info.hireDate,'yyyy년MM월dd일')}]]</td>               
+                    <td>[[${info.jobId}]]</td>               
+                    </tr>
+                 </t:block>
+         </tbody>
+         <!-- 전체조회에서  단건조회를 하려고 함. -->
+         <script>
+             const context = $('meta[name="contextPath"]').attr('value');
+             $('tbody > tr').on('click', function(event){
+            	 let tr = event.currentTarget;//이벤트가 등록된 대상
+            	 let eid = $(tr).children().eq(1).text();//실제 사원번호를 가르키는 2번째(eq(1)) 해당되는 td
+            	 let url =context + '/empInfo?employeeId=' + eid;//바꿀경로
+            	 location.href = url;
+             });
+         </script>
+    </table>
+</div>
 </body>
 </html>

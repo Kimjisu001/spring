@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/"> 
+<head>
+<meta charset="UTF-8">
+<title>사원정보 수정</title>
+<script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>사원정보 수정</h1>
+<form name="updateForm" th:object="${emp}">
+        <h3>사원 정보 수정</h3>
+        <div>
+            <label for="eid">사원번호</label>
+            <input type="text" th:field="*{employeeId}" readonly>
+        </div>
+        
+        <div>
+            <label for="ename">이름</label>
+            <input type="text" th:field="*{lastName}" >
+        </div>
+        <div>
+            <label for="email">이메일</label>
+            <input type="text"  th:field="*{email}" >
+        </div>
+        <div>
+            <label for="hDate">입사일</label>
+            <input type="date"  th:field="*{hireDate}" >
+        </div>
+        <div>
+            <label for="job">업무</label>
+            <input type="text"  th:field="*{jobId}">
+        </div>
+        <div>
+            <label for="sal">급여</label>
+            <input type="text"  th:field="*{salary}">
+        </div>
+        <div>
+            <button type="button" id="updateBtn">등록</button>
+        </div>
+    </form>
+    <script>
+       $('#updateBtn').on('click',updateAjax)
+       
+       function updateAjax(event){
+    	   //1)보낼 데이터 가져오기
+    	   let dataObj = getFormData();
+    	   //2)AJAX
+    	   $.ajax('empUpdate',{
+    		   type:'post',//method
+    		   //contentType:'',
+    		   data:dataObj //body 객체타입으로 구성
+    	   })
+    	   .done(result => {
+    		console.log(result);   
+    	   })
+    	   .fail(err=>console.log(err));
+    	   
+       }
+       
+       function getFormData(){
+    	   let formAry = $('form[name="updateForm"]').serializeArray();
+    	   
+    	   let formObj ={};
+    	   $.each(formAry, function(idx,tag){
+    		   console.log(idx,tag);
+    		   console.log(tag.name +' : '+tag.value);
+    		   
+    		   formObj[tag.name]=tag.value;
+    	   });
+    	   console.clear();
+    	   console.log(formObj);
+    	   return formObj
+       }
+    </script>
+</body>
+</html>
