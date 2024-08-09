@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org/"> 
+<html xmlns:th="https://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="Content">
 <head>
 <meta charset="UTF-8">
 <title>사원정보 수정</title>
-<script
+<!-- <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous"></script> -->
+    <th:block th:replace=~{common/configs/default_config::jQueryConfig}"></th:block>
 </head>
 <body>
 <h1>사원정보 수정</h1>
@@ -50,7 +54,8 @@
     	   //2)AJAX
     	   $.ajax('empUpdate',{
     		   type:'post',//method
-    		   //contentType:'',
+    		   //contentType:'application/json',//QueryString방식일때는 필요없으나 JSON타입으로 넘길거라면 필요
+    		   //data:JSON.stringify(dataObj);//QueryString방식일때는 필요없으나 JSON타입으로 넘길거라면 필요
     		   data:dataObj //body 객체타입으로 구성
     	   })
     	   .done(result => {

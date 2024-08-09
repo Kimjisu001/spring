@@ -26,7 +26,7 @@ public class EmpVO {
 	private String lastName;
 	private String email;
 	private String phoneNumber;
-	@DateTimeFormat(pattern = "yyyy-MM-dd") //출력에는 영향을 주지 않음.
+	@DateTimeFormat(pattern = "yyyy-MM-dd") //출력에는 영향을 주지 않음. DateTimeFormat을 들여다보면 심플데이트포멧에 대한 패턴
 	private Date hireDate;
 	private String jobId;
 	private double salary;

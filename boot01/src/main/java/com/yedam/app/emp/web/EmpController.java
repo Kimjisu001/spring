@@ -1,4 +1,4 @@
-package com.yedam.app.test.web;
+package com.yedam.app.emp.web;
 
 import java.util.List;
 import java.util.Map;
@@ -81,6 +81,7 @@ public class EmpController {
     @GetMapping("empUpdate")
     public String empUpdateFrom(EmpVO empVO, Model model) {
        EmpVO findVO = empService.empInfo(empVO);
+       //컨트롤러가 넘겨주는 값이 뭔지가 가장 중요함. model.addAttribute 페이지를 전달하기 위해 데이터를 담음
        model.addAttribute("emp",findVO);
        return "emp/update";
     }//empUpdateFrom end

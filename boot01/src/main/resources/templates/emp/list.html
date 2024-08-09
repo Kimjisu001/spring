@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org/"> 
-<script
+<html xmlns:th="https://www.thymeleaf.org/"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="Content">
+<!-- <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous"></script> -->
+  
 <head>
 <meta charset="UTF-8">
 <meta name="contextPath" th:value="${contextPath}">
 <!-- <meta name="contextPath" th:value="${#httpServletRequest.getcontextPath()}"> -->
 <title>전체조회</title>
+<th:block th:replace="~{common/configs/default_config :: jQueryConfig}"></th:block>
 </head>
 <body>
 <h1>전체조회</h1>

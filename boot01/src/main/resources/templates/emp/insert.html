@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org/"> 
+<html xmlns:th="https://www.thymeleaf.org/"       
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="Content">
 <head>
 <meta charset="UTF-8">
 <title>사원등록</title>.
-<script
+<!-- <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous"></script> -->
+  <th:block th:replace=~{common/configs/default_config::jQueryConfig}"></th:block>
 </head>
 <body>
 <h1>사원등록</h1>
