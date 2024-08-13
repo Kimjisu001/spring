@@ -12,12 +12,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-@Getter
-public class LoginUserVO implements UserDetails{
+@Getter //userVO에 대해 외부에서 쓸수있도록 허용해주라는 뜻
+public class LoginUserVO implements UserDetails{ //인터페이스 구현
 	private UserVO userVO;
 	
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
+	public Collection<? extends GrantedAuthority> getAuthorities() { //Collection 다양한 기능이 있음 찾아볼 것, getAuthorities 하위에 있는 대상들만 값을 받겠다. <->GrantedAuthority 상위에 있는 대상들만 값을 받겠다
 		List<GrantedAuthority> auths = new ArrayList<>();
 		auths.add(new SimpleGrantedAuthority(userVO.getRoleName()));
 		return auths; //extends 얘를 상속한 대상중에 하나

@@ -20,7 +20,7 @@ import com.yedam.app.emp.service.EmpVO;
 public class EmpController {
 	//해당 컨트롤러에서 제공하는 서비스
     private EmpService empService;
-    
+    //얘를 통해서 빈을 주입하겠습니다.( 객체가 필요로 하는 다른 객체(의존성)를 직접 생성하거나 찾는 것이 아니라, 외부에서 제공받는 방식)
     @Autowired
     public EmpController(EmpService empService) {
 		this.empService =empService;
@@ -35,11 +35,11 @@ public class EmpController {
     	//컨트롤러는 기본적으로 이 세가지 반복
     	//1) 해당 기능 수행 => Service
     	List<EmpVO> list = empService.empList();
-    	//2) 클라이언트에 전달할 데이터 담기
-    	model.addAttribute("emps", list);
+    	//2) addAttribute를 통해 클라이언트에 전달할 데이터 담기
+    	model.addAttribute("emps", list); //페이지에서 사용할 데이터를 모델을 활용하여 넘김
         return "emp/list";//3) 데이터를 출력할 페이지 결정
     	//classpath:/templates/      emp/list    .html
-    	//prefix                     return      subfix
+    	//prefix                     return      suffix
     }
 
     
@@ -56,6 +56,7 @@ public class EmpController {
     	//classpath:/templates/      emp/info    .html
     	//prefix                     return      subfix
     }//empInfo end
+    
     //등록-페이지확인(컨트롤러가 기본적으로 2개)GET
     @GetMapping("empInsert")
     public String empInsertForm() {

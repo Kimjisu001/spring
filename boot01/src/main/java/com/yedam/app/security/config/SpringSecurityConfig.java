@@ -24,7 +24,7 @@ public class SpringSecurityConfig {
     //빈을 새롭게 커스터마이징
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-       http.authorizeHttpRequests((authorize) 
+       http.authorizeHttpRequests((authorize) //Lambda DSL 자바 표현식
     		   ->authorize
     		   .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll() //FORWARD해당 통신이 발생했을때 permitAll 인증받지 않은 모든 사람에게 오픈
     		   .requestMatchers("/","/all").permitAll() //인증 없음 손님들이 올수 있는 로비 같은 거라고 볼수 있음.
@@ -38,13 +38,13 @@ public class SpringSecurityConfig {
                .logout(logout -> logout
             		   .logoutSuccessUrl("/all")
             		   .invalidateHttpSession(true));
-                
+               http.csrf(csrf->csrf.disable()); //개발하는 동안 인증 인가를 중지시켜놓고자 함. 왜냐? 인증방법을 박아넣어야해서 귀찮기 때문에
                return http.build();
     }//filterChain end
     //메모리 방식 등록: 프로젝트를 일시적으로 사용 빌드업 패턴
     //초기값으로 어떤 값을 가진다.
     /*
-    @Bean//메모리상 인증정보 등록 => 테스트 전용 방식
+    @Bean//메모리상 인증정보 등록 => 테스트 전용 방식 //빌터패턴: 디자인 패턴, 싱글톤, MVC와 같은 디자인 패턴
     InMemoryUserDetailsManager InMemoryUserDetailsService() {
     	UserDetails user = User.builder()
     			               .username("user1")

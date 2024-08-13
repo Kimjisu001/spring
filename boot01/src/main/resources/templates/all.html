@@ -1,17 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org/"> 
+<html xmlns:th="https://www.thymeleaf.org/"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"> 
 <head>
 <meta charset="UTF-8">
+<!--value 속성에 csrf.token이 있음 form태그를 활용하지 않고 아작스를 활용하는 경우에는 토큰 값을 박아넣어야함. -->
+<!-- <meat name="csrf" th:value="${_csrf.token}"> -->
 <title>Insert title here</title>
 </head>
 <body>
 <h1>메인페이지 입니다.</h1>
 <ul>
    <li><a th:href="@{/user}">일반사용자용페이지로</a></li>
-   <li><a th:href="@{/admin}">관리자 전용 페이지로</a></li>
+   <!-- 관리자페이지는 관리자에게만 보여야함. 관리자에게만 보이도록 작성(권한에 따라) -->
+   <li sec:authorize="hasRole('ADMIN')">
+       <a th:href="@{/admin}">관리자 전용 페이지로</a></li>
 </ul>
+<!--authorize 이 태그에 접근할 권한이 있는지 체크 
+    authentication 인증정보
+    principal 인증받은 정보를 화면에서 불러올 때 사용-->
+<th:block sec:authorize="isAuthenticated()"> 
+    <p sec:authentication="name"></p>
+    <p sec:authentication="principal.username"></p>
+    <p sec:authentication="principal.authorities"></p>
+    
 <form th:action="@{/logout}" method="post">
-   <button type="submit">버튼</button>
+   <button type="submit">로그아웃</button>
+   </th:block>
 </form>
 </body>
 </html>
