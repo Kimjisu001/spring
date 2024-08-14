@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="Content">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h4>도서등록</h4>
+
+<form th:action="@{/empInsert}" method="post">
+	<div>도서번호<input name="firstName"></div>	
+	<div>도서명<input name="lastName"></div>
+	<div>도서표지<input type="date" name="hireDate"></div>
+	<div>출판일자<input name="email"></div>
+	<div>금액<input name="jobId"></div>
+	<div>출판사<input name="jobId"></div>
+	<div>도서소개<input name="jobId"></div>
+	<button>등록</button>
+</form>
+</body>
+</html>

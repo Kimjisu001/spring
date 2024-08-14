@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="Content">
+<head>
+<meta charset="UTF-8">
+<title>단건조회</title>
+</head>
+<body>
+    <h1>단건조회</h1>
+     <table class="table">
+     <tr>
+        <th>번호</th>
+        <td>[[${board.bno}]]</td>
+      </tr> 
+      
+     <tr>
+        <th>제목</th>
+        <td>[[${board.title}]]</td>
+      </tr> 
+      
+     <tr>
+        <th>내용</th>
+        <td>[[${board.contents}]]</td>
+      </tr> 
+      
+     <tr>
+        <th>작성자</th>
+        <td>[[${board.writer}]]</td>
+      </tr> 
+      
+     <tr>
+        <th>첨부파일</th>
+        <!-- /images/cat.jpg -->
+        <!--에러나는 표현식: 표현식 중첩 X <td><img th:src="@{/images/${board.image}}" ></td>  -->
+        <td><img th:src="@{/images/{fileName}(fileName=${board.image})}" ></td>
+      </tr>
+      
+      <tr>
+        <th>작성일자</th>
+        <td>[[${#dates.format(board.regdate,'yyyy/MM/dd')}]]</td>
+      </tr> 
+   </table>
+   <button type="button" class="btn btn-light" 
+    th:onclick="|location.href='@{/boardUpdate(bno=${board.bno})}'|">수정</button>
+   <button type="button" class="btn btn-light" 
+   th:onclick="|location.href='@{/boardList}'|">목록</button>
+   <button type="button" class="btn btn-dark"
+   th:onclick="|location.href='@{/boardDelete(no=${board.bno})}'|">삭제</button>
+</body>
+
+
+</html>

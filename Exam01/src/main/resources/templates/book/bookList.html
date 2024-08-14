@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="Content">
+<head>
+<meta charset="UTF-8">
+<meta name="contextPath" th:value="${contextPath}">
+<title>도서조회</title>
+</head>
+<body>
+<div class= "container">
+<h3>도서조회</h3>
+<table class="table">
+     <thead>
+     <tr>
+        <th>도서번호</th>
+        <th>도서명</th>
+        <th>도서표지</th>
+        <th>출판일자</th>
+        <th>금액</th>
+        <th>출판사</th>
+        <th>도서소개</th>
+     </tr>
+     </thead>
+     <tbody>
+          <th:block th:each="book : ${list}"><!-- info임시변수, boards는 컨트롤러에서 가져와야함. sts반복문에 대한 값을 가지고 있는 변수-->
+          <!-- BookVO 데이터 타입 => <tr/> -->
+            <tr>
+               <td>[[${book.bookNo}]]</td>
+               <td>[[${book.bookName}]]</td>
+               <td>[[${book.bookCoverimg}]]</td>
+               <td>[[${#dates.format(book.bookDate, 'yyyy/MM/dd')}]]</td>
+               <td>[[${book.bookPrice}]]</td>
+               <td>[[${book.bookPublisher}]]</td>
+               <td>[[${book.bookInfo}]]</td>          
+            </tr>
+          </th:block>      
+     </tbody>
+     </table>
+</div>
+</body>
+</html>
