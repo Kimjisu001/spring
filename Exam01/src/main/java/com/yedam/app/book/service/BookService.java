@@ -7,4 +7,7 @@ public interface BookService {
 	public List<BookVO> bookList();
 //책 등록
 	public int insertBook(BookVO bookVO); 
+	
+//도서대여현황조회
+	public List<BookVO> bookall();
 }

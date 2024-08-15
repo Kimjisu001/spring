@@ -24,12 +24,19 @@ public class BoardServiceImpl implements BoardService{
 	   BoardServiceImpl(BoardMapper boardMapper){
 		   this.boardMapper = boardMapper;
 	   }
-	   
+	   //전체조회
+	   @Override
+	   public List<BoardVO> boardList() {
+		   return boardMapper.selectBoardAll();
+		}
+		//등록
 	   @Override
 	   public int insertBoard(BoardVO boardVO) {
 		   int result = boardMapper.insertBoardInfo(boardVO);
 		   return result == 1? boardVO.getBno() : -1;
 	   }
+	   
+	   //수정
 	   //맵을 활용한 이유=>아작스를 사용할거여서 이 형태의 맵은 임시 클래스라고 보면됨.
 	   @Override
 	   public Map<String,Object> updateBoard (BoardVO boardVO){
@@ -52,20 +59,18 @@ public class BoardServiceImpl implements BoardService{
 		   return map;
 	   }
 	   
+	   //삭제
 	   @Override
 	   public int deleteBoard(int boardNO) {
 		   return boardMapper.deleteBoardInfo(boardNO);
 	   }
 
-	@Override
-	public List<BoardVO> boardList() {
-		return boardMapper.selectBoardAll();
-	}
 
-	@Override
-	public BoardVO boardInfo(BoardVO boardVO) {
+       //단건조회
+	   @Override
+	   public BoardVO boardInfo(BoardVO boardVO) {
 		return boardMapper.selectBoardInfo(boardVO);
-	}
+	   }
 	
 //	@Override
 //	public int insertBoard(BoardVO boardVO) {

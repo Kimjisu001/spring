@@ -29,7 +29,7 @@
             <tr>
                <td>[[${book.bookNo}]]</td>
                <td>[[${book.bookName}]]</td>
-               <td style="width:15%"><img style="width:15%" th:src="@{/images/{fileName}(fileName=${book.bookCoverimg})}"></td>
+               <td>[[${book.bookCoverimg}]]</td>
                <td>[[${#dates.format(book.bookDate, 'yyyy/MM/dd')}]]</td>
                <td>[[${book.bookPrice}]]</td>
                <td>[[${book.bookPublisher}]]</td>

@@ -6,21 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="contextPath" th:value="${contextPath}">
-<title>도서조회</title>
+<title>도서별 대여매출현황</title>
 </head>
 <body>
 <div class= "container">
-<h3>도서조회</h3>
+<h3>도서별 대여매출현황</h3>
 <table class="table">
      <thead>
      <tr>
         <th>도서번호</th>
         <th>도서명</th>
-        <th>도서표지</th>
-        <th>출판일자</th>
-        <th>금액</th>
-        <th>출판사</th>
-        <th>도서소개</th>
+        <th>대여총계</th>
+        <th>대여횟수</th>
      </tr>
      </thead>
      <tbody>
@@ -29,11 +26,8 @@
             <tr>
                <td>[[${book.bookNo}]]</td>
                <td>[[${book.bookName}]]</td>
-               <td style="width:15%"><img style="width:15%" th:src="@{/images/{fileName}(fileName=${book.bookCoverimg})}"></td>
-               <td>[[${#dates.format(book.bookDate, 'yyyy/MM/dd')}]]</td>
-               <td>[[${book.bookPrice}]]</td>
-               <td>[[${book.bookPublisher}]]</td>
-               <td>[[${book.bookInfo}]]</td>          
+               <td>[[${book.rentPrice}]]</td>
+               <td>[[${book.bookCount}]]</td>          
             </tr>
           </th:block>      
      </tbody>

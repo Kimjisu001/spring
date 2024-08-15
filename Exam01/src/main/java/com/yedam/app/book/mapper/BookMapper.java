@@ -11,4 +11,7 @@ public interface BookMapper {
 	//등록
 	public int insertBookInfo(BookVO bookVO);
 	
+	//도서대여현황 조회
+	public List<BookVO> Bookall();
+	
 }

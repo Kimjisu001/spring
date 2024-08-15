@@ -38,9 +38,22 @@ public class BookController {
 	//도서 등록:처리
 	@PostMapping("/insertBook")
 	public String bookInsert(BookVO bookVO) {
-		  return "redirect:bookList";
+		int bno = bookService.insertBook(bookVO);
+		String url=null;
+		if(bno > -1) {
+			url="redirect:insertBook?bno="+bno;
+		}else {
+			url="redirect:empList";
+		}	
+		  return url;
 	}
 
+	//도서대여현황
+	@GetMapping("/bookall")
+	public String bookall(Model model, BookVO bookVO) {
+		model.addAttribute("list", bookService.bookall());
+		return "book/bookall";
+	}
 
 
 }

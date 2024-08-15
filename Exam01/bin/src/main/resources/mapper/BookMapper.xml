@@ -20,7 +20,7 @@
      <selectKey keyProperty = "bookNo"
                  resultType = "Integer"
                  order="BEFORE">
-                 select NVL(MAX(book_no),100)+1
+                 select NVL(MAX(bookNo),100)+1
                  from book_tbl_06
      </selectKey>
      INSERT INTO book_tbl_06
@@ -44,18 +44,6 @@
                  ,#{bookInfo}           
            )
      </insert>
-
-     <!-- 도서대여현황 조회 -->
-     <select id = "Bookall" resultType="BookVO">
-           select b.book_no
-                , b.book_name
-                , count(b.book_no)*r.rent_price as rent_price
-                , count(b.book_no) as bookCount
-           from book_tbl_06 b join rent_tbl_06 r
-           on b.book_no = r.book_no 
-           GROUP BY b.book_no
-                  , b.book_name
-                  , r.rent_price     
-               </select>
+     
      
 </mapper>

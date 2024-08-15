@@ -31,4 +31,9 @@ public class BookServiceImpl implements BookService{
 		return bookMapper.insertBookInfo(bookVO);
 	}
 
+	@Override
+	public List<BookVO> bookall() {
+		return bookMapper.Bookall();
+	}
+
 };
